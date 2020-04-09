@@ -67,9 +67,31 @@ class Main extends Component {
 
   render() {
     const game_state = this.state.game_state;
-    const services = [1,2,3,4,5,6,7,8,9,10]; // Array(this.state.protocol[0].length); 
+    const services = [1,2,3,4,5,6,7,8,9,10]; // Array(this.state.protocol[0].length);
     const current = this.state.current;
+    const error_message = "Request can’t be executed: violates the coordination protocol";
     let view;
+    let response;
+
+    if (typeof this.state.data === "string") {
+      if (this.state.data === error_message) {
+        response = <div className="card-body text-danger">
+                    {this.state.data}
+                  </div>
+      } else {
+        response = <div className="card-body text-success">
+                    {this.state.data}
+                  </div>
+      }
+    } else {
+      response = <div className="card-body text-success">
+                 {JSON.stringify(this.state.data)}
+                </div>
+    }
+
+
+
+
     if (game_state === 1) {
       view =  <div className="d-flex flex-row justify-content-center">
                 <div className="card bg-light border-dark">
@@ -95,9 +117,7 @@ class Main extends Component {
       view =  <div className="d-flex flex-row justify-content-center">
                 <div className="card bg-light border-dark">
                   <h5 className="card-header">Call a service</h5>
-                  <div className="card-body">
-                    {typeof this.state.data === "string" ? this.state.data : JSON.stringify(this.state.data)}
-                  </div>
+                  {response}
                   <div className="card-body">
                     {services.map((service, index) =>
                       <button key={index}
@@ -114,7 +134,7 @@ class Main extends Component {
     } else {
       view =  <div className="d-flex flex-row justify-content-center">
                 <div className="card bg-light border-dark">
-                  <h5 className="card-header">Final State Reached!</h5>
+                  <h5 className="card-header text-primary">Final State Reached!</h5>
                   <div className="card-body">
                     Refresh the browser to try again
                   </div>
