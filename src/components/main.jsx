@@ -89,9 +89,6 @@ class Main extends Component {
                 </div>
     }
 
-
-
-
     if (game_state === 1) {
       view =  <div className="d-flex flex-row justify-content-center">
                 <div className="card bg-light border-dark">
@@ -130,7 +127,6 @@ class Main extends Component {
                   </div>
                 </div>
               </div>;
-
     } else {
       view =  <div className="d-flex flex-row justify-content-center">
                 <div className="card bg-light border-dark">
